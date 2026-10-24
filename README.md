@@ -2,7 +2,6 @@
 
 An end-to-end test automation framework built on **Playwright + TypeScript**, using the Page Object Model, environment-based configuration, data-driven test utilities, and a custom HTML reporter (the TTA report) with screenshots, videos and traces for every step.
 
-Built by [The Testing Academy](https://thetestingacademy.com).
 
 ## Tech stack
 
