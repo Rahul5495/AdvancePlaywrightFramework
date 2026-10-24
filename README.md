@@ -439,4 +439,4 @@ Sync readers (CSV, YAML) can drive test generation at collection time. Async rea
 
 ## Author
 
-**Pramod Dutta**, [The Testing Academy](https://thetestingacademy.com)
+**Rahul Mangate**
