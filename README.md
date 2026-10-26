@@ -43,8 +43,8 @@ AdvancePlaywrightFramework3x
 Prerequisites: Node.js 20 or newer.
 
 ```bash
-git clone https://github.com/PramodDutta/AdvancePlaywrightFramework3x.git
-cd AdvancePlaywrightFramework3x
+git clone https://github.com/Rahul5495/AdvancePlaywrightFramework.git
+cd AdvancePlaywrightFramework
 
 npm ci                         # install dependencies
 npx playwright install         # download browsers
