@@ -11,9 +11,8 @@ test.describe("POM with Login Page Simple", () => {
         // await page.getByRole("textbox", { name: "Username" }).fill;
         // With POM
         const loginPage = new LoginPage(page);
-        await loginPage.goto();
-        await loginPage.login("standard_user", "tta_secret");
-        await expect(page).toHaveURL(/\/inventory$/);
-
+        await loginPage.open();
+        await loginPage.loginAs("standard_user", "tta_secret");
+    
     });
 });

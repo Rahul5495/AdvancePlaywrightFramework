@@ -1,30 +1,64 @@
 
-import { type Page, type Locator } from "@playwright/test";
+import { Page, Locator, expect } from "@playwright/test";
+import { BasePage } from "./BasePage";
 
-export class Cartpage {
+/**
+ * TTACart "Your Cart" page.
+ *
+ *   const cart = new CartPage(page);
+ *   await cart.open();
+ *   await cart.removeItem('tta-practice-backpack');
+ *   await cart.checkout();
+ */
 
-    readonly page : Page;
-    readonly title :  Locator;
-    readonly itemName : Locator;
-    readonly itemPrice : Locator;
-    readonly checkout : Locator;
+export class CartPage extends BasePage {
 
+    static readonly PATH = '/playwright/ttacart/cart.html';
+
+    private readonly title: Locator;
+    private readonly itemRows: Locator;
+    private readonly itemNames: Locator;
+    private readonly continueShoppingLink: Locator;
+    private readonly checkoutButton: Locator;
 
     constructor(page: Page) {
-        this.page = page;
+        super(page, "CartPage")
+        this.title = page.locator("[data-test='title']");
+        this.itemRows = page.locator('[data-test="inventory-item"]');
+        this.itemNames = page.locator('[data-test="inventory-item-name"]');
+        this.continueShoppingLink = page.locator('[data-test="continue-shopping"]');
+        this.checkoutButton = page.locator('[data-test="checkout"]');
 
-        // TTACart uses data-test, not Playwright's default data-testid.
-        const byTest = (id: string) => page.locator(`[data-test= "${id}"]`);
-
-        this.title = byTest("title");
-        this.itemName = byTest("inventory-item-name");
-        this.itemPrice = byTest("inventory-item-price");
-        this.checkout = byTest("checkout");
     }
 
-    async goto() {
+    async open(): Promise<void> {
+        await this.goto(CartPage.PATH);
+        await this.assertLoaded();
+    }
 
-        await this.page.goto("https://app.thetestingacademy.com/playwright/ttacart/cart");
+    async assertLoaded(): Promise<void> {
+        await expect(this.title).toContainText('Your Cart');
+    }
 
+    async itemNamesList(): Promise<string[]> {
+        return this.el.getAllTexts(this.itemNames);
+    }
+
+    async rowCount(): Promise<number> {
+        return this.itemRows.count();
+    }
+
+    async remove(id: string): Promise<void> {
+        await this.el.click(this.page.locator(`[data-test="remove-${id}"]`));
+    }
+
+    async continueShopping(): Promise<void> {
+        await this.el.click(this.continueShoppingLink);
+        await this.page.waitForLoadState('domcontentloaded');
+    }
+
+    async checkout(): Promise<void> {
+        await this.el.click(this.checkoutButton);
+        await this.page.waitForLoadState('domcontentloaded');
     }
 }
