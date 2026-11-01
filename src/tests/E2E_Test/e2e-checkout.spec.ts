@@ -46,9 +46,25 @@ test.describe("@P0 @Regression E2E @Checkout Feature", () => {
         await checkoutStepOnePage.assertLoad();
         await checkoutStepOnePage.fillGuest(customer);
         await checkoutStepOnePage.continue();
-        await checkoutStepTwoPage.assertLoad();
+        await checkoutStepTwoPage.assertLoaded();
         await checkoutStepTwoPage.finish();
         await checkoutCompletePage.assertOrderComplete();
+
+    });
+
+    test("User is able to remove item from CartPage", async({
+        page, 
+        inventoryPage, 
+        cartPage,
+    })=>{
+        const customer = DataGenerator.checkoutCustomer();
+        await inventoryPage.open();
+        await inventoryPage.addToCart(FIRST_ITEM_ID);
+        await cartPage.open();
+        expect(await cartPage.rowCount()).toBe(1);
+        await cartPage.removebutton();
+        await cartPage.continueShopping();
+        await inventoryPage.assertLoaded();
 
     });
 

@@ -36,8 +36,8 @@ export class InventoryPage extends BasePage {
         await expect.poll(async () => this.items.count()).toBeGreaterThan(3);
     }
 
-    async productNames(): Promise<void> {
-        this.el.getAllTexts(this.itemNames);
+    async productNames(): Promise<string[]> {
+        return this.el.getAllTexts(this.itemNames);
     }
 
     private addBtn(id: string): Locator {

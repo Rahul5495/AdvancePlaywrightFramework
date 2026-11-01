@@ -20,6 +20,7 @@ export class CartPage extends BasePage {
     private readonly itemNames: Locator;
     private readonly continueShoppingLink: Locator;
     private readonly checkoutButton: Locator;
+    private readonly removeButton: Locator;
 
     constructor(page: Page) {
         super(page, "CartPage")
@@ -28,6 +29,7 @@ export class CartPage extends BasePage {
         this.itemNames = page.locator('[data-test="inventory-item-name"]');
         this.continueShoppingLink = page.locator('[data-test="continue-shopping"]');
         this.checkoutButton = page.locator('[data-test="checkout"]');
+        this.removeButton = page.getByRole("button", {name:"Remove"});
 
     }
 
@@ -60,5 +62,10 @@ export class CartPage extends BasePage {
     async checkout(): Promise<void> {
         await this.el.click(this.checkoutButton);
         await this.page.waitForLoadState('domcontentloaded');
+    }
+
+    async removebutton(): Promise<void> {
+        await this.el.click(this.removeButton);
+        await expect(this.page.locator('[data-test="cart-empty"]')).toHaveText("Your cart is empty.");
     }
 }

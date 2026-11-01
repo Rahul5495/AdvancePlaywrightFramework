@@ -34,8 +34,7 @@ export class CheckoutStepTwoPage extends BasePage {
 
     }
 
-    async assertLoad(): Promise<void> {
-
+    async assertLoaded(): Promise<void> {
         await expect(this.title).toContainText("Overview");
         await expect(this.subtotalLabel).toBeVisible();
     }
