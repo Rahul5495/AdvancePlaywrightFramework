@@ -14,19 +14,19 @@ import { createLogger } from "@utils/Logger";
 const FIRST_ITEM_ID = "test-allthethings-tshirt-red";
 const log = createLogger("e2e-checkout_validFixture_ponytail_review");
 
-test.describe("@P0 @Regression E2E @Checkout Checkout Feature", () => {
+test.describe("@P0 @Regression E2E @Checkout Feature", () => {
     // Each step ends on the page in its title, so its screenshot shows that page.
 
     test("should complete checkout successfully", async ({
         page,
-        validLogin,
+        validLogin,   
         inventoryPage,
         cartPage,
         checkoutStepOnePage,
         checkoutStepTwoPage,
         checkoutCompletePage,
     }) => {
-
+        void validLogin;
         await visualStep(page, "Inventory page: add first item to cart", async () => {
             await inventoryPage.assertLoaded();
             await inventoryPage.addToCart(FIRST_ITEM_ID);

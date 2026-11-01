@@ -18,7 +18,7 @@ import { visualStep } from "@utils/visualSteps";
 const FIRST_ITEM_ID = "test-allthethings-tshirt-red";
 const log = createLogger("e2e-checkout-with-visualsteps");
 
-test.describe("@P0 @Regression E2E @Checkout Checkout Feature", () => {
+test.describe("@P0 @Regression E2E @Checkout Feature", () => {
     // Step 1 — every test in this suite starts already logged in.
 
     test.beforeEach(async ({ page, loginPage }) => {

@@ -9,7 +9,7 @@ import { visualStep } from "@utils/visualSteps";
 const FIRST_ITEM_ID = "test-allthethings-tshirt-red";
 const log = createLogger("e2e-checkout_Validfixtures");
 
-test.describe("@P0 @Regression E2E @Checkout Checkout Feature", () => {
+test.describe("@P0 @Regression E2E @Checkout Feature", () => {
     test("should complete checkout successfully", async ({
         page,
         validLogin,
