@@ -11,7 +11,7 @@ import logger from "@utils/Logger";
 test.describe("Restful Booker booking API", () => {
 
     const baseUrl = process.env.API_BASE_URL || "https://restful-booker.herokuapp.com";
-    test("TC#2 @p0 - DELETE : Verify that deleted the existing booking is working fine.", async ({ request }) => {
+    test("TC#1 @p0 - DELETE : Verify that deleted the existing booking is working fine.", async ({ request }) => {
 
         const headers = {
             'Accept': 'application/json',
