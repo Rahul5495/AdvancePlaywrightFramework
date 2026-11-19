@@ -6,7 +6,7 @@ import logger from "@utils/Logger";
 // Create Token -> Post Auth -> token
 // Create Booking -> Post Booking -> bookng ID
 // by using this token and bookingid
-// we can make the put request.
+// we can make the PATCH request.
 
 test.describe("Restful Booker booking API", () => {
 
@@ -63,7 +63,7 @@ test.describe("Restful Booker booking API", () => {
             const data = await reponseData.json();
             bookingid = data.bookingid;
             expect(bookingid).toBeTruthy();
-            logger.info(`Created booking id for update: ${bookingid}`);
+            logger.info(`Created booking id for partial update: ${bookingid}`);
 
         });
 
@@ -80,7 +80,7 @@ test.describe("Restful Booker booking API", () => {
             console.log(data);
             expect(data.firstname).toBe(payload.firstname);
             expect(data.lastname).toBe(payload.lastname);
-            logger.info(`Updated booking id ${bookingid}: ${data.firstname} ${data.lastname}`);
+            logger.info(`Partially updated booking id ${bookingid}: ${data.firstname} ${data.lastname}`);
         });
 
     });

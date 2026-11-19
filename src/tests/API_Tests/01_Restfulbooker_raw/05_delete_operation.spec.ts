@@ -2,11 +2,11 @@
 import { test, expect } from "@playwright/test";
 import logger from "@utils/Logger";
 
-// PATCH
+// Delete
 // Create Token -> Post Auth -> token
 // Create Booking -> Post Booking -> bookng ID
 // by using this token and bookingid
-// we can make the put request.
+// we can make the delete request.
 
 test.describe("Restful Booker booking API", () => {
 
@@ -46,7 +46,7 @@ test.describe("Restful Booker booking API", () => {
             const data = await responseData.json();
             token = data.token;
             expect(token).toBeTruthy();
-            logger.info('Created auth token for PATCH booking flow');
+            logger.info('Created auth token for Delete booking flow');
         });
 
         await test.step("Step 2 - Create booking", async () => {
@@ -59,7 +59,7 @@ test.describe("Restful Booker booking API", () => {
             const data = await reponseData.json();
             bookingid = data.bookingid;
             expect(bookingid).toBeTruthy();
-            logger.info(`Created booking id for update: ${bookingid}`);
+            logger.info(`Created booking id for delete: ${bookingid}`);
 
         });
 
