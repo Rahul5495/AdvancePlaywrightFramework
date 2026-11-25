@@ -1,0 +1,35 @@
+
+import { test, expect } from "@fixtures/booker.fixture";
+import { buildBookingFromGenerator } from "@testdata/booking.data";
+import { JSONPath } from "jsonpath-plus";
+
+test.describe.serial("@e2e @P0 Level 3 - Booking lifecycle (BookingApi fixture)", () => {
+    let bookingId: number;
+
+    test("create a booking", async ({ bookingApi }) => {
+
+        const payload = buildBookingFromGenerator({ firstname: 'E2E', lastname: 'Journey' });
+        const response = await bookingApi.createBooking(payload);
+        const { bookingid, booking } = response;
+
+        expect(bookingid).toBeGreaterThan(0);
+        expect(booking).toEqual(payload);
+
+        const firstname = JSONPath({ path: "$.booking.firstname", json: response, wrap: false });
+        const lastname = JSONPath({ path: "$.booking.lastname", json: response, wrap: false });
+        const totalprice = JSONPath({ path: '$.booking.totalprice', json: response, wrap: false });
+        const depositpaid = JSONPath({ path: '$.booking.depositpaid', json: response, wrap: false });
+        const checkin = JSONPath({ path: '$.booking.bookingdates.checkin', json: response, wrap: false });
+        const checkout = JSONPath({ path: '$.booking.bookingdates.checkout', json: response, wrap: false });
+        const additionalneeds = JSONPath({ path: '$.booking.additionalneeds', json: response, wrap: false });
+
+        expect(firstname).toBe(payload.firstname);
+        expect(lastname).toBe(payload.lastname);
+        expect(totalprice).toBe(payload.totalprice);
+        expect(depositpaid).toBe(payload.depositpaid);
+        expect(checkin).toBe(payload.bookingdates.checkin);
+        expect(checkout).toBe(payload.bookingdates.checkout);
+        expect(additionalneeds).toBe(payload.additionalneeds);
+
+    });
+});
